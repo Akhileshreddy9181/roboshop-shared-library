@@ -8,7 +8,6 @@ def call () {
         stages {
             // Build Code
             stage('Compile/Build') {
-                when { not { branch 'main' } }
                 steps {
                     script {
                         common.compile()
