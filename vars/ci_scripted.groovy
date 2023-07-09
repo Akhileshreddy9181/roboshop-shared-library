@@ -15,12 +15,15 @@ def call () {
             stage('Compile/Build') {
                 common.compile()
             }
+        }
+
+        if(!env.TAG_NAME /*&& ( !env.TAG_NAME || env.BRANCH_NAME != "main" )*/ ) {
             stage('Test Cases') {
                 common.testcases()
             }
         }
 
-        if(!env.TAG_NAME ) {
+        if(env.BRANCH_NAME != "main") {
             stage('Test Cases') {
                 common.testcases()
             }
