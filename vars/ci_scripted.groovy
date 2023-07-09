@@ -17,17 +17,12 @@ def call () {
             }
         }
 
-        if(!env.TAG_NAME /*&& ( !env.TAG_NAME || env.BRANCH_NAME != "main" )*/ ) {
+        if(!env.TAG_NAME && env.BRANCH_NAME != "main" ) {
             stage('Test Cases') {
                 common.testcases()
             }
         }
 
-        if(env.BRANCH_NAME != "main") {
-            stage('Test Cases') {
-                common.testcases()
-            }
-        }
 
 
 
