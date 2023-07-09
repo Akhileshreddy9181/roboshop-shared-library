@@ -11,10 +11,11 @@ def call () {
             git branch: 'main', url: 'https://github.com/akhileshreddy9181/cart'
             sh 'ls -l'
         }
-
-        stage('Compile/Build') {
-            sh 'env'
-            common.compile()
+        if(env.BRANCH_NAME != "main") {
+            stage('Compile/Build') {
+                sh 'env'
+                common.compile()
+            }
         }
 
         stage('Test Cases') {
