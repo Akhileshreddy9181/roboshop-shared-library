@@ -17,7 +17,7 @@ def call () {
             }
         }
 
-        if(!env.TAG_NAME) {
+        if(!env.TAG_NAME || env.BRANCH_NAME != "main" ) {
             stage('Test Cases') {
                 common.testcases()
             }
