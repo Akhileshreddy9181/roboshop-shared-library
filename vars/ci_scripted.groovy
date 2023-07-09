@@ -5,15 +5,14 @@ def call () {
     node('workstation') {
 
         stage('Check Out Code') {
-            sh 'ls -l'
             cleanWs()
-            sh 'ls -l'
             git branch: 'main', url: 'https://github.com/akhileshreddy9181/cart'
-            sh 'ls -l'
         }
+
+        sh 'env'
+
         if(env.BRANCH_NAME != "main") {
             stage('Compile/Build') {
-                sh 'env'
                 common.compile()
             }
         }
