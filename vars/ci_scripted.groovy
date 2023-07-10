@@ -23,10 +23,13 @@ def call () {
             }
         }
 
-
-        stage('Code Quality') {
-            common.codequality()
+        if(env.BRANCH_NAME ==~ "PR-.*")
+        {
+            stage('Code Quality') {
+                common.codequality()
+            }
         }
+
 
     }
 
