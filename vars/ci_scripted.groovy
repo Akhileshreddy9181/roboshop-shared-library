@@ -32,7 +32,7 @@ def call () {
 
         if(env.TAG_NAME) {
             stage('Package') {
-                common.testcases()
+                common.prepareArtifacts()
             }
             stage('Artifact Upload') {
                 common.testcases()
