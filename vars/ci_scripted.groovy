@@ -30,6 +30,15 @@ def call () {
             }
         }
 
+        if(env.TAG_NAME) {
+            stage('Package') {
+                common.package()
+            }
+            stage('Artifact Upload') {
+                common.artifact()
+            }
+        }
+
 
     }
 
