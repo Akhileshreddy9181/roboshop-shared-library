@@ -30,10 +30,10 @@ def prepareArtifacts() {
 
     if(app_lang == "maven")
     {
-        sh 'zip -r ${component}-${TAG_NAME}.zip ${component}.jar VERSION'
+        sh 'zip -r ${component}-${TAG_NAME}.zip ${component}.jar schema VERSION'
     }
     else {
-        sh 'zip -r ${component}-${TAG_NAME}.zip * -x Jenkinsfile VERSION'
+        sh 'zip -r ${component}-${TAG_NAME}.zip * -x Jenkinsfile'
     }
 
 }
