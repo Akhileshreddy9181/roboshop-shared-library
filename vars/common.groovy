@@ -39,19 +39,18 @@ def prepareArtifacts() {
 }
 
 def artifactUpload() {
-    MASKED_SECRET = 'I_SHOULD_BE_MASKED'
+
+
+    env.NEXUS_USER = sh (script: ' aws ssm get-parameter --name prod.nexus.user --with-decryption | jq .Parameter.Value | xargs', returnStdout: true).trim()
+
+    emv.NEXUS_PASS = sh (script: ' aws ssm get-parameter --name prod.nexus.pass --with-decryption | jq .Parameter.Value | xargs', returnStdout: true).trim()
+
     wrap([$class: 'MaskPasswordsBuildWrapper',
-          varPasswordPairs: [[password: MASKED_SECRET]]]) {
-        echo 'Retrieve Secret: ' + MASKED_SECRET
-        echo MASKED_SECRET
+          varPasswordPairs: [[password: NEXUS_USER], [password: NEXUS_PASS]]]) {
+        sh 'echo ${TAG_NAME} >VERSION'
+        sh 'curl -v -u ${NEXUS_USER}:${NEXUS_PASS} --upload-file ${component}-${TAG_NAME}.zip http://172.31.94.39:8081/repository/${component}/${component}-${TAG_NAME}.zip'
+
     }
 
-    NEXUS_USER = sh (script: ' aws ssm get-parameter --name prod.nexus.user --with-decryption | jq .Parameter.Value | xargs', returnStdout: true).trim()
-
-    sh 'echo ${TAG_NAME} >VERSION'
-    /*if (app_lang == "nodejs" || app_lang == "angular")
-    {*/
-        sh 'curl -v -u ${NEXUS_USER}:admin123 --upload-file ${component}-${TAG_NAME}.zip http://172.31.94.39:8081/repository/${component}/${component}-${TAG_NAME}.zip'
-    //}
 
 }
