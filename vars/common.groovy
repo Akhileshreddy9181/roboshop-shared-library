@@ -33,7 +33,7 @@ def prepareArtifacts() {
         sh 'zip -r ${component}-${TAG_NAME}.zip ${component}.jar VERSION'
     }
     else {
-        sh 'zip -r ${component}-${TAG_NAME}.zip * -x Jenkinsfile'
+        sh 'zip -r ${component}-${TAG_NAME}.zip * -x Jenkinsfile VERSION'
     }
 
 }
