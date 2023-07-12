@@ -22,7 +22,7 @@ def call () {
 
             stage('Deploy Servers') {
                 steps {
-                    env.SSH_PASSWORD = sh (script: ' aws ssm get-parameter --name prod.ssh.pass --with-decryption | jq .Parameter.Value | xargs', returnStdout: true).trim()
+                    env.SSH_PASSWORD = sh (script: 'aws ssm get-parameter --name prod.ssh.pass --with-decryption | jq .Parameter.Value | xargs', returnStdout: true).trim()
 
 
                     wrap([$class: 'MaskPasswordsBuildWrapper',
