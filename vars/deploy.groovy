@@ -26,6 +26,9 @@ def call () {
 
                         env.SSH_PASSWORD = sh (script: 'aws ssm get-parameter --name prod.ssh.pass --with-decryption | jq .Parameter.Value | xargs', returnStdout: true).trim()
 
+                        echo 'Printing SSH password'
+                        println ${SSH_PASSWORD}
+
 
                         wrap([$class: 'MaskPasswordsBuildWrapper',
                               varPasswordPairs: [[password: SSH_PASSWORD]]]) {
