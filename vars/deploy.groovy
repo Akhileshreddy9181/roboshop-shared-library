@@ -34,7 +34,7 @@ def call () {
                               varPasswordPairs: [[password: SSH_PASSWORD]]]) {
                             sh 'aws ec2 describe-instances --filters "Name=tag:Name,Values=${component}-${environment}" --query "Reservations[*].Instances[*].PrivateIpAddress" --output text >/tmp/servers'
 
-                            sh 'ansible-playbook -i /tmp/servers roboshop.yml -e role_name=${component} -e env=${environment} -e ansible_user=centos -e env.ansible_password=${SSH_PASSWORD}'
+                            sh 'ansible-playbook -i /tmp/servers roboshop.yml -e role_name=${component} -e env=${environment} -e ansible_user=centos -e env.ansible_password=${SSH_PASSWORD} -vvv'
 
                         }
                     }
