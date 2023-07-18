@@ -26,7 +26,7 @@ def codequality() {
 }
 
 def prepareArtifacts() {
-    sh 'echo ${TAG_NAME} >VERSION'
+    /*sh 'echo ${TAG_NAME} >VERSION'
 
     if(app_lang == "maven")
     {
@@ -34,7 +34,9 @@ def prepareArtifacts() {
     }
     else {
         sh 'zip -r ${component}-${TAG_NAME}.zip * -x Jenkinsfile'
-    }
+    }*/
+
+   sh 'docker build -t 191164592803.dkr.ecr.us-east-1.amazonaws.com/${component}-${TAG_NAME} .'
 
 }
 
